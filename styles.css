@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    /*elimina los márgenes que trae por defecto*/
+    padding: 0;
+    /*elimina los rellenos por defecto*/
+    box-sizing: border-box;
+    /*incluye el padding y borde dentro del tamaño total*/
+    list-style: none;
+    /*Quita los íconos de listas predeterminados*/
+    text-decoration: none;
+    /*Quita los íconos subrayados y decoración de enlaces*/
+}
+
+body {
+    background: #000000;
+    /*fondo completamente oscuro*/
+    overflow: hidden;
+    /*oculta el contenido que sobresalga del viewport*/
+}
+
+/*Contenedor Prinicpal centrado en pantalla*/
+.container {
+    position: absolute;
+    /*posicionamiento fuera del flujo normal*/
+    top: 50%;
+    /*Alineado vertical al %*/
+    left: 50%;
+    /*alineado  horizontalmente al 50%*/
+    transform: translate(-50%, -50%);
+    /*centrado exacto con transformación*/
+    width: 1500px;
+    /*ancho fijo del contenedor*/
+    height: 650px;
+    /*alto fijo del contenedor*/
+    border-radius: 15px;
+    /*bordes redondeados y suaves*/
+    background: #f5f5f5b9;
+    /*fondo blanco con opacidad*/
+    box-shadow: 0 30px 50px #dbdbdbc4;
+    /* sombra suave alrededor del contenedor*/
+}
+
+/*Estilo base para cada item del slide*/
+.container .slide .item {
+    width: 200px;
+    /*ancho del slide individual*/
+    height: 300px;
+    /*alto del slide individual*/
+    position: absolute;
+    /*posicionamiento para superponer elementos*/
+    top: 50%;
+    /*posición vertical al centro*/
+    transform: translate(0, -50%);
+    /*ajusta para centrar exactamente vertical*/
+    border-radius: 20px;
+    /*bordes redondeados*/
+    box-shadow: 0 20px 50px #505050;
+    /*sombra intensa para dar profundidad*/
+    background-position: 50% 50%;
+    /*imagen de fondo centrado*/
+    background-size: cover;
+    /*escala la imagen para cubrir todo el contenedor */
+    background-repeat: no-repeat;
+    /*no repite la imagen de fondo*/
+    display: inline-block;
+    /*se comporta como bloque en línea*/
+    transition: 0.5s;
+    /*transición suave para cambios en estilo*/
+
+}
+
+/*el primer y segundo slide se agrandan para ocupar todo el contenedor*/
+.slide .item:nth-child(1),
+.slide .item:nth-child(2) {
+
+    top: 0;
+    /*alineado del top o techo del contenedor*/
+    left: 0;
+    /*alineado a la izquierda*/
+    transform: translate(0, 0);
+    /*sin desplazamiento*/
+    border-radius: 0;
+    /*sin bordes redondeados temporalmente*/
+    width: 100%;
+    /*ocupa todo el ancho*/
+    height: 100%;
+    /*ocupa todo el alto*/
+    border-radius: 15px;
+    /*se redifine el borde redondeado*/
+
+}
+
+/*Muestra el contenido solo del segundo slide*/
+.slide .item:nth-child(2) .content {
+    display: block;
+    /*el contenido se muestra activamente*/
+
+}
+
+/*tercer slide: se posiciona en el centro*/
+.slide .item:nth-child(3) {
+    left: 50%;
+    /*alineado a la derecha*/
+
+}
+
+/*cuarto slide: a la derecha del centro*/
+.slide .item:nth-child(4) {
+    left: calc(50% + 220px);
+    /*alineado desplazado a la derecha*/
+
+}
+
+/*Quinto slide: más a la derecha*/
+.slide .item:nth-child(5) {
+    left: calc(50% + 440px);
+    /*más desplazamiento que el anterior*/
+}
+
+/* a partir del sexto slide: todos ocupan el mismo espacio y se ocultan parcialmente*/
+.slide .item:nth-child(n + 6) {
+    left: calc(50% + 440px);
+    /*se mantiene fuera de la vista*/
+    overflow: hidden;
+    /*el contenido es ocultado*/
+}
+
+/*Estilo del contenido de los slides*/
+.item .content {
+    position: absolute;
+    /*posicionamiento absoluto dentro del slide*/
+    top: 50%;
+    /*centrado de forma vertical*/
+    left: 100px;
+    /*espaciado desde la izquierda*/
+    width: 300px;
+    /*ancho fijo del bloque*/
+    text-align: left;
+    /*alineación del texto a la izquierda*/
+    color: #eee;
+    /*color del texto*/
+    transform: translate(0, -50%);
+    /*ajuste para centrar verticalmente*/
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /*fuente del sistema opertivo*/
+    display: none;
+    /*oculta por defecto*/
+
+}
+
+/*titulo del contenido*/
+.content .name {
+    font-size: 40px;
+    /* tamaño grande*/
+    text-transform: uppercase;
+    /*todo en mayúscula*/
+    font-weight: bold;
+    /*negrita*/
+    opacity: 0;
+    /*inicialmente invisible*/
+    animation: animate 1s ease-in-out 1 forwards;
+    /*animación suave con retardado*/
+
+}
+
+/*DESCRIPCIÓN DEL SLIDE*/
+.content .description {
+    margin-top: 10px;
+    /*separación superior*/
+    margin-bottom: 20px;
+    /*separación inferior*/
+    opacity: 0;
+    /*inicialmente invisible*/
+    animation: animate 1s ease-in-out 0.3s 1 forwards;
+    /*aparece después de 0.3 segundos*/
+
+}
+
+/*botón dentro del slide*/
+.content button {
+    padding: 10px 20px;
+    /*relleno interno horizontal y vertical*/
+    border: none;
+    /*sin borde*/
+    cursor: pointer;
+    /*cursor tipo puntero*/
+    opacity: 0;
+    /*invisible inicialmente*/
+    animation: animate 1s ease-in-out 0.6s forwards;
+    /*aparece después de 6s*/
+}
+
+/*definición de la animación personalizada*/
+@keyframes animate {
+    from {
+        opacity: 0;
+        /*comienza invisible*/
+        transform: translate(0, 100px);
+        /*termina en su posición original*/
+        filter: blur(33px)
+            /*totalmente enfocado*/
+    }
+
+    to {
+        opacity: 1;
+        /*totalmente visible*/
+        transform: translate(0);
+        /*termina en posición original*/
+        filter: blur(0);
+        /*totalmente enfocado*/
+    }
+
+}
+
+/*contenedor de los botones de navegación*/
+.button {
+    width: 100%;
+    /*ancho completo*/
+    text-align: center;
+    /*centrado horizontal del contenido*/
+    position: absolute;
+    /*posición absoluta dentro del contenedor*/
+    bottom: 20px;
+    /*separado del borde inferior*/
+
+}
+
+/*botones de navegación*/
+.button button {
+    width: 40px;
+    /*ancho fijo*/
+    height: 35px;
+    /*alto fijo*/
+    border-radius: 8px;
+    /*bordes redondeados*/
+    border: none;
+    /*sin borde por defecto*/
+    cursor: pointer;
+    /*cursor tipo punteo*/
+    margin: 0 5px;
+    /*espacio horizontal entre botones*/
+    border: 1px solid #000;
+    /*borde negro*/
+    transition: 0.3s;
+    /* transición suave para hover*/
+}
+
+/*estilo al pasar el cursor por encima del botón*/
+.button button:hover {
+    background: #ababab;
+    /*fondo gris claro*/
+    color: #fff;
+    /*texto blanco*/
+
+}
